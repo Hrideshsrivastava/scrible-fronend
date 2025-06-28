@@ -72,11 +72,7 @@ const stopDrawing = () => {
     socket.emit('draw', { x: offsetX, y: offsetY });
   };
 
-  const stopDrawing = () => {
-    setIsDrawing(false);
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.beginPath();
-  };
+ 
 
   return (
     <div className="game-card">
