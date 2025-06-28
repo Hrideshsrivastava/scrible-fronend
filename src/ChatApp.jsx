@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:5000'); // match your backend URL
+const socket = io(import.meta.env.VITE_BACKEND_URL); // match your backend URL
 
 function ChatApp() {
   const [messages, setMessages] = useState([]);
