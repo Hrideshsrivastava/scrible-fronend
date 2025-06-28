@@ -3,7 +3,7 @@ import ChatApp from './ChatApp';
 import { io } from 'socket.io-client';
 
 // Connect to backend WebSocket server
-const socket = io('http://localhost:5000'); // Change if your backend is hosted elsewhere
+const socket = io(import.meta.env.VITE_BACKEND_URL); 
 
 
 
