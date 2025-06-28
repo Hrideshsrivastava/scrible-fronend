@@ -30,9 +30,15 @@ function ScribbleGame() {
       ctx.beginPath();
       ctx.moveTo(x, y);
     });
+    
+  // Receive "pen lift" signal
+  socket.on('draw-end', () => {
+    ctx.beginPath();
+  });
 
     return () => {
       socket.off('draw');
+      socket.off('draw-end');
     };
   }, []);
 
@@ -44,7 +50,14 @@ function ScribbleGame() {
     ctx.moveTo(offsetX, offsetY);
     setIsDrawing(true);
   };
+const stopDrawing = () => {
+  setIsDrawing(false);
+  const ctx = canvasRef.current.getContext('2d');
+  ctx.beginPath();
 
+  // Notify other clients to lift their pen
+  socket.emit('draw-end');
+};
   const draw = (e) => {
     if (!isDrawing) return;
     const { offsetX, offsetY } = e.nativeEvent;
